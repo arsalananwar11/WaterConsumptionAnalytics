@@ -1,0 +1,364 @@
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    body, h1, h2, h3, h4, h5, h6 {
+        font-family: "Montserrat", sans-serif;
+    }
+
+    .w3-row-padding img {
+        margin-bottom: 12px;
+    }
+    /* Set the width of the sidebar to 120px */
+    .w3-sidebar {
+        margin-left: 0px;
+        margin-right: 0px;
+        width: 120px;
+        background-image: linear-gradient(black,#398da0);
+    }
+    /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+    #maindiv {
+        margin-left: 50px;
+        margin-right: 0px;
+    }
+
+    
+
+    
+</style>
+<!-- Icon Bar (Sidebar - hidden on small screens) -->
+<nav class="w3-sidebar  w3-bar-block  w3-center w3-text-white" style="width:120px;">
+    <!-- Avatar image in top left corner -->
+    <img src="~/img/watertap.jpg" style="width:100%">
+    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-hover-black bg-transparent">
+        <i class="fa fa-home w3-xxlarge"></i>
+        <p>HOME</p>
+    </a>
+    <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black bg-transparent bg-transparent">
+        <i class="fa fa-user w3-xxlarge"></i>
+        <p>ABOUT</p>
+    </a>
+    <a href="#photos" class="w3-bar-item w3-button w3-padding-large w3-hover-black bg-transparent">
+        <i class="fa fa-paper-plane w3-xxlarge"></i>
+        <p> UPLOAD</p>
+    </a>
+    <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black bg-transparent">
+        <i class="fa fa-envelope w3-xxlarge"></i>
+        <p>CONTACT</p>
+    </a>
+</nav>
+
+
+
+<!-- Page Content -->
+<div class="" id="maindiv" style="max-width:1400px;">
+<div class="w3-content w3-text-black w3-padding-24 w3-center" id="home">
+        <h2 class="w3-text-black">Water Consumption Analytics</h2>
+        <hr class="w3-opacity">
+        <div class="w3-panel">
+            <div class="w3-row-padding " style="margin: 0px">
+                <div class="w3-twothird w3-card" style="border: 1px solid grey;border-radius: 8px;height: 550px;margin-right:0px">
+                    <h2>Bengaluru South</h2>
+                    <img src="~/img/southmap.PNG" style="width:100%" alt="Bengaluru South Map">
+                </div>
+                <div class="w3-third w3-card" style="border: 1px solid grey;border-radius: 8px; height: 550px">
+                    <h5>Statistics</h5>
+                    <canvas id="doughnut-chart" width="100%" ></canvas>
+                    <table class="w3-table w3-white">
+            <tr>
+                <td><i class="fa fa-user w3-text-blue w3-large"></i></td>
+                <td>Per indivisual consumption / day</td>
+                <td><i>80-100 gallons </i></td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-home w3-text-red w3-large"></i></td>
+                <td>Area</td>
+                <td><i>20.18 sq km.</i></td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-users w3-text-yellow w3-large"></i></td>
+                <td>Total Population</td>
+                <td><i>2,05,274</i></td>
+            </tr>
+            
+        </table>
+                </div>
+            </div>
+        </div>
+        <hr>
+        @*<p>
+                Some text about me. Some text about me. I am lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur
+                adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>*@
+        @*<h3 class="w3-padding-16 w3-text-black">My Skills</h3>
+        <p class="w3-wide">Photography</p>
+        <div class="w3-white">
+            <div class="w3-blue" style="height:28px;width:95%"></div>
+        </div>
+        <p class="w3-wide">Web Design</p>
+        <div class="w3-white">
+            <div class="w3-dark-grey" style="height:28px;width:85%"></div>
+        </div>
+        <p class="w3-wide">Photoshop</p>
+        <div class="w3-white">
+            <div class="w3-dark-grey" style="height:28px;width:80%"></div>
+        </div><br>*@
+
+        <div class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
+            <div class="w3-half w3-section">
+                <span class="w3-xlarge">Release vs. Consumption</span><br>
+                
+                <canvas class="line-chart" id="line-chart1" height="250" ></canvas>
+            </div>
+            <div class="w3-half w3-section">
+                <span class="w3-xlarge">Per Indivisual Consumption per Day</span><br>
+                <canvas class="line-chart" id="line-chart2" height="250"></canvas>
+            </div>
+            <div class="w3-half w3-section">
+                <span class="w3-xlarge">Future Demand</span><br>
+                <canvas class="line-chart" id="line-chart3" height="250"></canvas>
+            </div>
+            <div class="w3-half w3-section">
+                <span class="w3-xlarge">NRW</span><br>
+                <canvas class="line-chart" id="line-chart4" height="250"></canvas>
+            </div>
+        </div>
+
+       
+
+        <!-- Grid for pricing tables -->
+        @*<h3 class="w3-padding-16 w3-text-light-grey">My Price</h3>
+        <div class="w3-row-padding" style="margin:0 -16px">
+            <div class="w3-half w3-margin-bottom">
+                <ul class="w3-ul w3-white w3-center w3-opacity w3-hover-opacity-off">
+                    <li class="w3-dark-grey w3-xlarge w3-padding-32">Basic</li>
+                    <li class="w3-padding-16">Web Design</li>
+                    <li class="w3-padding-16">Photography</li>
+                    <li class="w3-padding-16">5GB Storage</li>
+                    <li class="w3-padding-16">Mail Support</li>
+                    <li class="w3-padding-16">
+                        <h2>$ 10</h2>
+                        <span class="w3-opacity">per month</span>
+                    </li>
+                    <li class="w3-light-grey w3-padding-24">
+                        <button class="w3-button w3-white w3-padding-large w3-hover-black">Sign Up</button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="w3-half">
+                <ul class="w3-ul w3-white w3-center w3-opacity w3-hover-opacity-off">
+                    <li class="w3-dark-grey w3-xlarge w3-padding-32">Pro</li>
+                    <li class="w3-padding-16">Web Design</li>
+                    <li class="w3-padding-16">Photography</li>
+                    <li class="w3-padding-16">50GB Storage</li>
+                    <li class="w3-padding-16">Endless Support</li>
+                    <li class="w3-padding-16">
+                        <h2>$ 25</h2>
+                        <span class="w3-opacity">per month</span>
+                    </li>
+                    <li class="w3-light-grey w3-padding-24">
+                        <button class="w3-button w3-white w3-padding-large w3-hover-black">Sign Up</button>
+                    </li>
+                </ul>
+            </div>*@
+            <!-- End Grid/Pricing tables -->
+        </div>
+
+        <!-- Testimonials -->
+        <h3 class="w3-padding-24 w3-text-black">BWSSB</h3>
+        <img src="~/img/watertap.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:80px">
+        <p><span class="w3-large w3-margin-right">B. Suresh</span> Cheif Engineer, BWSSB</p>
+        <p>Wonderful Implementation</p><br>
+
+        <img src="~/img/watertap.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:80px">
+        <p><span class="w3-large w3-margin-right">Ram Naresh</span> Addl. Executive Engineer, BWSSB</p>
+        <p>Keep it up. Well done.</p>
+        <!-- End About Section -->
+    </div>
+
+    <!-- Portfolio Section -->
+    @*<div class="w3-padding-64 w3-content" id="photos">
+        <h2 class="w3-text-light-grey">My Photos</h2>
+        <hr style="width:200px" class="w3-opacity">*@
+
+        <!-- Grid for photos -->
+        @*<div class="w3-row-padding" style="margin:0 -16px">
+            <div class="w3-half">
+                <img src="/w3images/wedding.jpg" style="width:100%">
+                <img src="/w3images/rocks.jpg" style="width:100%">
+                <img src="/w3images/sailboat.jpg" style="width:100%">
+            </div>
+
+            <div class="w3-half">
+                <img src="/w3images/underwater.jpg" style="width:100%">
+                <img src="/w3images/chef.jpg" style="width:100%">
+                <img src="/w3images/wedding.jpg" style="width:100%">
+                <img src="/w3images/p6.jpg" style="width: 100%">
+            </div>*@
+            <!-- End photo grid -->
+        </div>
+        <!-- End Portfolio Section -->
+    </div>
+
+    <!-- Contact Section -->
+    <div class="w3-padding-32 w3-content w3-text-black" id="contact">
+        <h2 class="w3-text-light-black">Contact:</h2>
+        <hr style="width:200px" class="w3-opacity">
+
+        <div class="w3-section">
+            <p><i class="fa fa-map-marker fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Bengaluru, IN</p>
+            <p><i class="fa fa-phone fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Phone: +00 151515</p>
+            <p><i class="fa fa-envelope fa-fw w3-text-white w3-xxlarge w3-margin-right"> </i> Email: mail@mail.com</p>
+        </div><br>
+        <p>Feedback/ Queries:</p>
+
+        <form action="/action_page.php" target="_blank">
+            <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="Name"></p>
+            <p><input class="w3-input w3-padding-16" type="text" placeholder="Email" required name="Email"></p>
+            <p><input class="w3-input w3-padding-16" type="text" placeholder="Subject" required name="Subject"></p>
+            <p><input class="w3-input w3-padding-16" type="text" placeholder="Message" required name="Feedback/ Query"></p>
+            <p>
+                <button class="w3-button w3-light-grey w3-padding-large" type="submit">
+                    <i class="fa fa-paper-plane"></i> SEND
+                </button>
+            </p>
+        </form>
+        <!-- End Contact Section -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="w3-content w3-padding-64 w3-text-black w3-xlarge">
+        <i class="fa fa-facebook-official w3-hover-opacity"></i>
+        <i class="fa fa-instagram w3-hover-opacity"></i>
+        <i class="fa fa-snapchat w3-hover-opacity"></i>
+        <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+        <i class="fa fa-twitter w3-hover-opacity"></i>
+        <i class="fa fa-linkedin w3-hover-opacity"></i>
+        <!-- End footer -->
+    </footer>
+
+    <!-- END PAGE CONTENT -->
+</div>
+
+<script>
+    new Chart(document.getElementById("doughnut-chart"), {
+    type: 'doughnut',
+    data: {
+      labels: ["Basavangudi", "Bommanahalli","BTM Layout", "Chamrajpete", "Girinagar", "Hampinagar", "Hosakerehall","HSR Layout","JP Nagar","Sudhamanagar"],
+      datasets: [
+        {
+          label: "Area(sq. km)",
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#5e955d", "#2e2e22","#22ba58","#f8f3b9","#a4a85a"],
+          data: [1.17,1.85,2.13,1.03,1.77,1.11,1.34,6.98,1.79,1.01]
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Area of each ward (sq. km)'
+      }
+    }
+    });
+
+
+    new Chart(document.getElementById("line-chart1"), {
+  type: 'line',
+  data: {
+    labels: ['Jan 16','Jun 16','Jan 17','Jun 17','Jan 18','Jun 18','Jan 19','Jun 19','Jan 20','Jun 20'],
+    datasets: [{ 
+        data:[1500,1600,1700,1750,1800,1850,1900,1950,2000,2150],
+        label: "Consumption",
+        borderColor: "#3e95cd",
+        fill: false
+      }, { 
+        data: [1600,1650,1700,1750,1850,1950,2000,1950,2100,2350],
+        label: "Release",
+        borderColor: "#8e5ea2",
+        fill: false
+      }
+      
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'Consumption vs Release (in tmc) '
+    }
+  }
+    });
+
+     new Chart(document.getElementById("line-chart2"), {
+  type: 'line',
+  data: {
+    labels: ['Jan 16','Jun 16','Jan 17','Jun 17','Jan 18','Jun 18','Jan 19','Jun 19','Jan 20','Jun 20'],
+    datasets: [{ 
+        data:[60,63,68,75,72,78,70,67,70,74],
+        label: "Consumption/Day",
+        borderColor: "#3e95cd",
+        fill: false
+      }
+      
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'Per Indivisual Consuption Per Day (in gallons)'
+    }
+  }
+     });
+
+     new Chart(document.getElementById("line-chart3"), {
+  type: 'line',
+  data: {
+    labels: ['Jan 16','Jun 16','Jan 17','Jun 17','Jan 18','Jun 18','Jan 19','Jun 19','Jan 20','Jun 20'],
+    datasets: [{ 
+        data:[1500,1600,1700,1750,1800,1850,1900,1950,2000,2150],
+        label: "Current Pace",
+        borderColor: "#3e95cd",
+        fill: false
+      }, { 
+        data: [1500,1570,1630,1700,1720,1770,1865,1935,1940,2050],
+        label: "Implementation of our water model",
+        borderColor: "#8e5ea2",
+        fill: false
+      }
+      
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'Future Demand'
+    }
+  }
+     });
+
+
+     new Chart(document.getElementById("line-chart4"), {
+  type: 'line',
+  data: {
+    labels: ['Jan 16','Jun 16','Jan 17','Jun 17','Jan 18','Jun 18','Jan 19','Jun 19','Jan 20','Jun 20'],
+    datasets: [{ 
+        data:[1500,1600,1700,1750,1800,1850,1900,1950,2000,2150],
+        label: "NRW",
+        borderColor: "#3e95cd",
+        fill: false
+      }
+      
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'NRW (in tmc)'
+    }
+  }
+});
+</script>
+
